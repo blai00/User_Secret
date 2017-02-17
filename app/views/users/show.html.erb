@@ -1,0 +1,15 @@
+<h1>Welcome <%= @user.name %></h1>
+
+<form action ='/secrets' method='post'>
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <input type='text' name ='New Secret'>
+    <input type='submit' value ='Create Secret'>
+</form>
+
+<% @user.secrets.each do |s| %>
+    <p><%= s.content %></p>
+    <%= link_to "Delete", @users.secret, :method => :delete %>
+<% end %>
+
+
+<%= link_to "Edit Profile", edit_user_path %>
