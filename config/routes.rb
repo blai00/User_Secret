@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root 'users#new'
+  root 'sessions#new'
 
   get 'sessions/index'
 
@@ -8,9 +8,13 @@ Rails.application.routes.draw do
   
   post 'sessions' => 'sessions#create'
   
-  delete 'sessions' => 'session#destroy'
+  delete 'sessions/:id' => 'sessions#destroy'
   
-  post 'users/create'
+
+  
+  post 'likes' => 'likes#create'
+  
+  delete 'likes/:id' => 'likes#destroy'
   
   
   

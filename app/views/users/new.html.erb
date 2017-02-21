@@ -4,9 +4,11 @@
 <% end %>
 <form action= '/users' method='post'>
     <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-    Name<input type='text' name="user[:name]"> 
-    Email<input type='text' name="user[:email]">
-    Password<input type='password' name ="user[:password]">
-    Password Confirmation<input type='password' name="user[:password_confirmation]">
+    Name<input type='text' name="user[name]"> 
+    Email<input type='text' name="user[email]">
+    Password<input type='password' name ="user[password]">
+    Password Confirmation<input type='password' name="user[password_confirmation]">
     <button type = 'submit'>Join</button>
 </form>
+
+<%= link_to "Already have an Account?", sessions_new_path %>

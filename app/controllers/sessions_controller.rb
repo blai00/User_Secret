@@ -10,17 +10,17 @@ class SessionsController < ApplicationController
    
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to '/users'
+      redirect_to user
 
       
     else
       flash[:message] = 'Invalid'
-      redirect_to '/session/new'
+      redirect_to sessions_new_path
     end
   end 
 
   def destroy
-    session.delete[:user_id]
+    reset_session
     redirect_to '/sessions/new'
     
   end

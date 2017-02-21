@@ -12,13 +12,15 @@
     <p><%= e %></p>
   <% end %>
 <% end %>
+
+<%= yield %>
+
 <% if current_user %>
-  <form action='/sessions' method='post'>
+  <form action='/sessions/<%= current_user.id %>' method='post'>
     <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
     <input type='hidden' name='_method' value='delete'>
     <input type='submit' value='Log Out'>
   </form>
 <% end %>
-<%= yield %>
 </body>
 </html>

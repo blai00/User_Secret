@@ -1,15 +1,21 @@
-class SecretController < ApplicationController
+class SecretsController < ApplicationController
      before_action :require_login, only: [:index, :create, :destroy]
+     before_action :set_secret, only: [:destroy]
     def index
-        @secret = Secret.all()
+        @secrets = Secret.all
+       
     end
     
     
     def create
-        secret = Secret.new
-        if secret.valid?
-            secret.save()
-            redirect_to users
+        user = current_user
+        secret = Secret.create(secret_params)
+        puts secret.inspect
+        puts secret_params.inspect
+        puts params.inspect
+        
+        if secret.save
+            redirect_to user
         else 
             flash[:message] = 'Invalid secret'
             redirect_to users
@@ -17,11 +23,23 @@ class SecretController < ApplicationController
     end
             
     def destroy 
-        secret = Secret.find(:id)
-        secret.destroy if secret.user == current_user
-        redirect_to users_show_url
+        puts params.inspect
+        
+        @secret.destroy if @secret.user == current_user
+        
+        redirect_to current_user
         
     end 
+    
+    private
+    
+    def secret_params
+         params.require(:secret).permit(:content, :user_id)
+    end
+    
+    def set_secret
+        @secret = Secret.find(params[:id])
+    end
             
   
 end
